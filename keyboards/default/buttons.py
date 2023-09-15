@@ -2,15 +2,17 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeybo
 from aiogram.utils.callback_data import CallbackData
 from api import *
 
-
+# Language buttons
 choose_language = ReplyKeyboardMarkup(resize_keyboard=True )
 choose_language.insert(KeyboardButton('🇺🇿 O\'zbekcha')).insert(KeyboardButton('🇷🇺 Русский')).insert(KeyboardButton('🇬🇧 English'))
+
+# Main menu buttons
 main_uz = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_uz.insert(KeyboardButton(text="📝 Menyu")).row(KeyboardButton(text="📖 Buyurtmalarim"), KeyboardButton(text="🛒 Savat"), KeyboardButton(text="⚙️ Sozlamalar"), KeyboardButton(text="✍️ Sharh qoldiring"))
+main_uz.insert(KeyboardButton(text="📝 Xizmatlar")).row(KeyboardButton(text="📖 Buyurtmalarim"), KeyboardButton(text="⚙️ Sozlamalar")).insert(KeyboardButton(text="✍️ Aloqa"))
 main_ru = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_ru.insert(KeyboardButton(text="📝 Меню")).row(KeyboardButton(text="📖 Мои заказы"), KeyboardButton(text="🛒 Корзина"), KeyboardButton(text="⚙️ Настройки"), KeyboardButton(text="✍️ Оставить отзыв"))
+main_ru.insert(KeyboardButton(text="📝 Услуги")).row(KeyboardButton(text="📖 Мои заказы"), KeyboardButton(text="⚙️ Настройки")).insert(KeyboardButton(text="✍️ Контакт"))
 main_en = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_en.insert(KeyboardButton(text="📝 Menu")).row(KeyboardButton(text="📖 My orders"), KeyboardButton(text="🛒 Basket"), KeyboardButton(text="⚙️ Settings"), KeyboardButton(text="✍️ Leave a feedback"))
+main_en.insert(KeyboardButton(text="📝 Services")).row(KeyboardButton(text="📖 My orders"), KeyboardButton(text="⚙️ Settings")).insert(KeyboardButton(text="✍️ Contact"))
 
 
 # GET ALL CATEGORIES

@@ -20,9 +20,10 @@ async def bot_start(message: types.Message):
     username = message.from_user.username
     telegram_id = message.from_user.id
     # print(full_name, username, telegram_id)
-    # print(message.from_user.to_python())
+    print(message.from_user.to_python())
 
     check = create_user(telegram_id, message.from_user.to_python())
+    print(check)
     if check == 400:
         language = language_info(telegram_id)
         if language == 'uz':
