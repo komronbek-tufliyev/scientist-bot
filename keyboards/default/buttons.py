@@ -35,28 +35,45 @@ def categories(language):
 def settings(language):
     button = ReplyKeyboardMarkup(resize_keyboard=True, )
     button.row(InlineKeyboardButton(text="🇺🇿 O'zbekcha"), InlineKeyboardButton(text="🇷🇺 Русский"), InlineKeyboardButton(text="🇬🇧 English"))
-    if language == 'ru':
+    if language == 'uz':
         # return to main menu
-        button.row(InlineKeyboardButton(text="🔝 Вернуться в главное меню",))
+        button.row(InlineKeyboardButton(text="🔝 Bosh menyuga qaytish",))
     elif language == 'en':
         # return to main menu
         button.row(InlineKeyboardButton(text="🔝 Return to main menu",))
     else:
-        button.row(InlineKeyboardButton(text="🔝 Bosh menyuga qaytish",))
+        button.row(InlineKeyboardButton(text="🔝 Вернуться в главное меню",))
 
     return button
 
 ############## Button Comment ##############
 def cancel(language):
     button = ReplyKeyboardMarkup(resize_keyboard=True, )
-    if language == 'ru':
+    if language == 'uz':
         # cancel
-        button.row(InlineKeyboardButton(text="❌ Отменить",))
+        button.row(InlineKeyboardButton(text="❌ Bekor qilish",))
     elif language == 'en':
         # cancel
         button.row(InlineKeyboardButton(text="❌ Cancel",))
     else:
-        button.row(InlineKeyboardButton(text="❌ Bekor qilish",))
+        button.row(InlineKeyboardButton(text="❌ Отменить",))
 
     return button
 
+
+def services(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    if language == 'uz':
+        button.row(InlineKeyboardButton('Maqola', callback_data='article'))
+    elif language == 'en':
+        button.row(InlineKeyboardButton('Article', callback_data='article'))
+    else:
+        button.row(InlineKeyboardButton('Maq', callback_data='article'))
+
+    return button
+
+
+def articles(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True)
+    if language == 'uz':
+        button.row()
