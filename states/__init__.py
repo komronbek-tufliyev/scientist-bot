@@ -1,1 +1,2 @@
-from .languages import *
+from .languages import Language
+from .levels import Level

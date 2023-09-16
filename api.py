@@ -8,10 +8,12 @@ BASE_URL = 'http://127.0.0.1:8000'
 ##### Create User #####
 def create_user(telegram_id: int, data: dict) -> dict:
     endpoint = f"{BASE_URL}/uz/api/botusers/"
+    full_name = f"{data['first_name']} {data['last_name']}" if all(key in data for key in ['first_name', 'last_name']) in data else data['first_name'] if 'first_name' in data else None
+    print(full_name)
     payload = {
         'telegram_id': telegram_id,
-        'full_name': f"{data['first_name']} {data['last_name']}",
-        'username': data['username'],
+        'full_name': full_name,
+        'username': data['username'] if 'username' in data else None,
         'language': data['language_code'],
     }
     response = requests.post(endpoint, json=payload)
