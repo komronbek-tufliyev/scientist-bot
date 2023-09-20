@@ -32,13 +32,13 @@ async def comment_get(message:types.Message, state:FSMContext):
     if message.text in ["❌ Отменить", "❌ Bekor qilish", "❌ Cancel"]:
         if language == 'uz':
             await message.answer("✅ Bosh menyuga xush kelibsiz\n" \
-                                 f"🍕 Mazali pitsalar! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
+                                 f"💻 Maqola, jurnal yozish, mahalliy va xalqaro jurnallarda chop etish xizmatlari! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
         elif language == 'en':
             await message.answer("✅ Welcome to the main menu\n" \
-                                 f"🍕 Delicious pizzas! Are you starting to order?", reply_markup=main_en)
+                                 f"💻 Articles, magazine writing, publishing services in local and international magazines! Are you starting to order?", reply_markup=main_en)
         else:
             await message.answer("✅ Добро пожаловать в главное меню\n" \
-                                 f"🍕 Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
+                                 f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)
 
         await state.finish()
     else:
@@ -46,12 +46,12 @@ async def comment_get(message:types.Message, state:FSMContext):
         if language == 'uz':
             await message.answer("😇 Fikringiz uchun rahmat!")
             await message.answer("✅ Bosh menyuga xush kelibsiz\n" \
-                                 f"🍕 Mazali pitsalar! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
+                                 f"💻 Maqola, jurnal yozish, mahalliy va xalqaro jurnallarda chop etish xizmatlari! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
         elif language == 'en':
             await message.answer("😇 Thank you for your comment!")
             await message.answer("✅ Welcome to the main menu\n" \
-                                 f"🍕 Delicious pizzas! Are you starting to order?", reply_markup=main_en)
+                                 f"💻 Articles, magazine writing, publishing services in local and international magazines! Are you starting to order?", reply_markup=main_en)
         else:
             await message.answer("😇 Спасибо за ваш комментарий!")
             await message.answer("✅ Добро пожаловать в главное меню\n" \
-                                 f"🍕 Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
+                                 f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)

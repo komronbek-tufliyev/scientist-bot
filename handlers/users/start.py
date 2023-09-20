@@ -1,6 +1,9 @@
 from aiogram import types
 from aiogram.dispatcher.filters.builtin import CommandStart
 from aiogram.dispatcher import FSMContext
+# aiogram formatting
+from aiogram.types import ParseMode
+
 
 from loader import dp
 
@@ -28,13 +31,13 @@ async def bot_start(message: types.Message):
         language = language_info(telegram_id)
         if language == 'uz':
             await message.answer("✅ Bosh menyuga xush kelibsiz\n"\
-            f"🍕 Mazali pitsalar! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
+            f"💻 Maqola, jurnal yozish, mahalliy va xalqaro jurnallarda chop etish xizmatlari! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz, parse_mode=ParseMode.HTML)
         elif language == 'ru':
             await message.answer("✅ Добро пожаловать в главное меню\n"\
-            f"🍕 Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
+            f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
         elif language == 'en':
             await message.answer("✅ Welcome to the main menu\n"\
-            f"🍕 Delicious pizza! Shall we start ordering?", reply_markup=main_en)
+            f"💻 Articles, magazine writing, publishing services in local and international magazines! Shall we start ordering?", reply_markup=main_en)
     else:
         await message.answer(f"🇺🇿 Botdan foydalanish uchun o'zingizga qulay tilni tanlang.\n"\
                             f"🇷🇺 Для использования бота выберите удобный для вас язык.\n"\
@@ -50,15 +53,15 @@ async def set_language_system(message: types.Message, state:FSMContext):
             if message.text == '🇺🇿 O\'zbekcha':
                 change_language(telegram_id=message.from_user.id, language='uz')
                 await message.answer("✅ Bosh menyuga xush kelibsiz\n"\
-                f"🍕 Mazali pitsalar! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
+                f"💻 Maqola, jurnal yozish, mahalliy va xalqaro jurnallarda chop etish xizmatlari! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
             elif message.text == '🇷🇺 Русский':
                 change_language(telegram_id=message.from_user.id, language='ru')
                 await message.answer("✅ Добро пожаловать в главное меню\n"\
-                f"🍕 Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
+                f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)
             elif message.text == '🇬🇧 English':
                 change_language(telegram_id=message.from_user.id, language='en')
                 await message.answer("✅ Welcome to the main menu\n"\
-                f"🍕 Delicious pizza! Shall we start ordering?", reply_markup=main_en)
+                f"💻 Articles, magazine writing, publishing services in local and international magazines! Shall we start ordering?", reply_markup=main_en)
             await state.finish()
         else:
             await message.answer(" 🇺🇿 Botdan foydalanish uchun o'zingizga qulay tilni tanlang.\n"\

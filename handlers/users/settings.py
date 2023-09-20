@@ -26,20 +26,20 @@ async def gotosettings(message:types.Message):
 async def change_lang(message:types.Message):
     if message.text == "🇺🇿 O'zbekcha":
         change_language(telegram_id=message.from_user.id, language="uz")
-        await message.answer(f"🙂 Assalomu alaykum, {message.from_user.full_name}, @AloqachiAdminBot botiga xush kelibsiz!\n\n"\
-                             "😋 Ushbu bot orqali mazali pitsalarga buyurtma bera olasiz. Pitsalar manzilingizga tezkor yetkazib beramiz!\n\n"\
-                             "🍕 Buyurtna berishni boshlaysizmi?", reply_markup=main_uz)
+        await message.answer(f"🙂 Assalomu alaykum, {message.from_user.full_name}, @new_scientist_bot botiga xush kelibsiz!\n\n"\
+                             "📚 Ushbu bot orqali mahalliy va xalqaro ilmiy jurnallardan siz yozgan maqola va boshqalarni chop etishingiz, ilmiy ishingiz uchun kerakli materiallar olishingiz mumkin. Marhamat xizmatlarimizidan foydalaning!\n\n"\
+                             "💻 Buyurtna berishni boshlaysizmi?", reply_markup=main_uz)
     elif message.text == "🇬🇧 English":
         change_language(telegram_id=message.from_user.id, language="en")
-        await message.answer(f"🙂 Hello, {message.from_user.full_name}, welcome to @AloqachiAdminBot!\n\n"\
-                             "😋 You can order delicious pizzas through this bot. We will deliver the pizza to your address quickly!\n\n"\
-                             "🍕 Are you starting to order?", reply_markup=main_en)
+        await message.answer(f"🙂 Hello, {message.from_user.full_name}, welcome to @new_scientist_bot!\n\n"\
+                             "📚 Through this bot, you can publish your articles and others from local and international scientific journals, and get necessary materials for your scientific work. Take advantage of our services!\n\n"\
+                             "💻 Are you starting to order?", reply_markup=main_en)
     else:
         change_language(telegram_id=message.from_user.id, language="ru")
         await message.answer(
-            f"🙂 Здравствуйте, {message.from_user.full_name}, добро пожаловать в бот @AloqachiAdminBot!\n\n"\
-            "😋 Через этого бота вы можете заказать вкусную пиццу. Доставим пиццу по вашему адресу быстро!\n\n"
-            "🍕 Начать заказывать?", reply_markup=main_ru)
+            f"🙂 Здравствуйте, {message.from_user.full_name}, добро пожаловать в бот @new_scientist_bot!\n\n"\
+            "📚 С помощью этого бота вы можете публиковать свои и другие статьи из местных и международных научных журналов, а также получать необходимые материалы для своей научной работы. Воспользуйтесь нашими услугами!\n\n"
+            "💻 Начать заказывать?", reply_markup=main_ru)
 
 
 ################  Go to Menu  ####################
@@ -48,13 +48,13 @@ async def back(message:types.Message):
     language = language_info(message.from_user.id)
     if language == 'uz':
         await message.answer("✅ Bosh menyuga xush kelibsiz\n" \
-                             f"🍕 Mazali pitsalar! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
+                             f"💻 Maqola, jurnal yozish, mahalliy va xalqaro jurnallarda chop etish xizmatlari! Buyurtma berishni boshlaysizmi?", reply_markup=main_uz)
     elif language == 'en':
         await message.answer("✅ Welcome to the main menu\n" \
-                             f"🍕 Delicious pizzas! Are you starting to order?", reply_markup=main_en)
+                             f"💻 Articles, magazine writing, publishing services in local and international magazines! Are you starting to order?", reply_markup=main_en)
     else:
         await message.answer("✅ Добро пожаловать в главное меню\n" \
-                             f"🍕 Вкусный пиццы! Вы начинайте заказывать?", reply_markup=main_ru)
+                             f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)
 
 
 ##################  Change Language Command   #################
