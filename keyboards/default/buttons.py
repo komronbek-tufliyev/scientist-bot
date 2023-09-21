@@ -87,16 +87,16 @@ def services(language):
             )
     elif language == 'en':
         button.add(
-            InlineKeyboardButton('Article', callback_data=services_callback.new(type='article', action='article')), 
-            InlineKeyboardButton('Patent', callback_data=services_callback.new(type='patent', action='patent')), 
-            InlineKeyboardButton('Certificate', callback_data=services_callback.new(type='certificate', action='certificate')), 
+            InlineKeyboardButton('Article', callback_data=services_callback.new(data='article', action='article')), 
+            InlineKeyboardButton('Patent', callback_data=services_callback.new(data='patent', action='patent')), 
+            InlineKeyboardButton('Certificate', callback_data=services_callback.new(data='certificate', action='certificate')), 
             InlineKeyboardButton(text="🔝 Return to main menu",)
         )
     else:
         button.add(
-            InlineKeyboardButton('Статья', callback_data=services_callback.new(type='article', action='article')), 
-            InlineKeyboardButton('Патент', callback_data=services_callback.new(type='patent', action='patent')), 
-            InlineKeyboardButton('Сертификат', callback_data=services_callback.new(type='certificate', action='certificate')), 
+            InlineKeyboardButton('Статья', callback_data=services_callback.new(data='article', action='article')), 
+            InlineKeyboardButton('Патент', callback_data=services_callback.new(data='patent', action='patent')), 
+            InlineKeyboardButton('Сертификат', callback_data=services_callback.new(data='certificate', action='certificate')), 
             InlineKeyboardButton(text="🔝 Вернуться в главное меню",)
         )
 
@@ -108,26 +108,26 @@ def article_buttons(language):
     button = ReplyKeyboardMarkup(resize_keyboard=True)
     if language == 'uz':
         button.add(
-            InlineKeyboardButton('OAK uchun', callback_data=article_callback.new(type='oak')), 
-            InlineKeyboardButton('Respublika konferensiya uchun', callback_data=article_callback.new(type='conference')),
-            InlineKeyboardButton('Xalqaro konferensiya uchun', callback_data=article_callback.new(type='international_conference')),
-            InlineKeyboardButton("Xalqaro ilmiy jurnal uchun", callback_data=article_callback.new(type='international_journal')),
+            InlineKeyboardButton('OAK uchun', callback_data=article_callback.new(data='oak')), 
+            InlineKeyboardButton('Respublika konferensiya uchun', callback_data=article_callback.new(data='conference')),
+            InlineKeyboardButton('Xalqaro konferensiya uchun', callback_data=article_callback.new(data='international_conference')),
+            InlineKeyboardButton("Xalqaro ilmiy jurnal uchun", callback_data=article_callback.new(data='international_journal')),
             InlineKeyboardButton('🔝 Bosh menyuga qaytish')
         )
     elif language == 'en':
         button.add(
             InlineKeyboardButton('For OAK', callback_data='oak'), 
-            InlineKeyboardButton('For Republic conference', callback_data=article_callback.new(type='conference')),
-            InlineKeyboardButton('For International conference', callback_data=article_callback.new(type='international_conference')),
-            InlineKeyboardButton("For International scientific journal", callback_data=article_callback.new(type='international_journal')),
+            InlineKeyboardButton('For Republic conference', callback_data=article_callback.new(data='conference')),
+            InlineKeyboardButton('For International conference', callback_data=article_callback.new(data='international_conference')),
+            InlineKeyboardButton("For International scientific journal", callback_data=article_callback.new(data='international_journal')),
             InlineKeyboardButton('🔝 Return to main menu')
         )
     else:
         button.add(
             InlineKeyboardButton('Для ОАК', callback_data='oak'), 
-            InlineKeyboardButton('Для Республиканской конференции', callback_data=article_callback.new(type='conference')),
-            InlineKeyboardButton('Для Международной конференции', callback_data=article_callback.new(type='international_conference')),
-            InlineKeyboardButton("Для Международного научного журнала", callback_data=article_callback.new(type='international_journal')),
+            InlineKeyboardButton('Для Республиканской конференции', callback_data=article_callback.new(data='conference')),
+            InlineKeyboardButton('Для Международной конференции', callback_data=article_callback.new(data='international_conference')),
+            InlineKeyboardButton("Для Международного научного журнала", callback_data=article_callback.new(data='international_journal')),
             InlineKeyboardButton('🔝 Вернуться в главное меню')
         )
         

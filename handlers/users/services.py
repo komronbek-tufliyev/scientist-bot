@@ -24,6 +24,36 @@ async def services_handler(message: types.Message, state:FSMContext):
         await message.answer("Наши услуги", reply_markup=services(language))
     await state.finish()
 
+@dp.message_handler(Text(equals=['Maqola', 'Статья', 'Article']))
+async def article_handler(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language,
+        'level': 'article'
+    })
+    if language == 'uz':
+        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=article_buttons(language))
+    elif language == 'en':
+        await message.answer("Thank you! Your opinion is important to us!", reply_markup=article_buttons(language))
+    else:
+        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=article_buttons(language))
+    await state.finish()
+
+
+@dp.message_handler(Text(equals=['DGU', 'Патент', 'Patent']))
+async def patent_handler(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language,
+        'level': 'patent'
+    })
+    if language == 'uz':
+        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=patent_buttons(language))
+    elif language == 'en':
+        await message.answer("Thank you! Your opinion is important to us!", reply_markup=patent_buttons(language))
+    else:
+        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=patent_buttons(language))
+    await state.finish()
 
 
 @dp.callback_query_handler(lambda c: c.data and c.data.startswith('services'))
