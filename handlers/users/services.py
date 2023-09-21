@@ -173,120 +173,83 @@ async def writing_and_publishing_handler(message: types.Message, state:FSMContex
 
 
 
-@dp.message_handler(Text(equals=["Tayyor maqolani chop etish", "Publishing a ready-made article", "Публикация готовой статьи"]), content_types=ContentTypes.DOCUMENT)
-
-
-
-
-@dp.callback_query_handler(lambda c: c.data and c.data.startswith('services'))
-async def services_callback_handler(call: types.CallbackQuery):
-    data = services_callback.parse(call.data)
-    language = language_info(call.from_user.id)
-    
-    # Handle the data accordingly based on 'data' and 'action'
-    if data['action'] == 'article':
-        await call.message.answer("Handle article action", reply_markup=services(language))
-    elif data['action'] == 'patent':
-        await call.message.answer("Handle patent action", reply_markup=services(language))
-    elif data['action'] == 'certificate':
-        await call.message.answer("Handle certificate action", reply_markup=services(language))
-
-    await call.answer()
-
-
-
-@dp.callback_query_handler(lambda c: c.data)
-async def article_callback_handler(call: types.CallbackQuery):
-    language = language_info(call.from_user.id)
-    
-    # Handle article action
-    await call.message.answer("Handle article action", reply_markup=article_buttons(language))
-    await call.answer()
-
-
-@dp.callback_query_handler(lambda c: c.data and c.data == 'patent')
-async def patent_callback_handler(call: types.CallbackQuery):
-    language = language_info(call.from_user.id)
-    
-    # Handle patent action
-    await call.message.answer("Handle patent action", reply_markup=patent_buttons(language))
-    await call.answer()
-
-
-
-
-@dp.callback_query_handler(lambda c: c.data == 'services')
-async def callback_inline(call: types.CallbackQuery):
-    await call.answer(cache_time=60)
-    print(call.data)
-    if call.data == 'services':
-        language = language_info(call.from_user.id)
-        await call.message.answer("Xizmatlarimiz", reply_markup=services(language))
-
-@dp.callback_query_handler(lambda c: c.data == 'article')
-async def callback_inline2(call: types.CallbackQuery):
-    await call.answer(cache_time=60)
-    print(call.data)
-    if call.data == 'services':
-        language = language_info(call.from_user.id)
-        await call.message.answer("Xizmatlarimiz", reply_markup=services(language))
-
-
-
-
-# @dp.callback_query_handler(lambda c: c.data == 'article_buttons')
-# async def callback_inline3(call: types.CallbackQuery):
-#     await call.answer(cache_time=60)
-#     print(call.data)
-#     if call.data == 'article_buttons':
-#         language = language_info(call.from_user.id)
-#         await call.message.answer("Xizmatlarimiz", reply_markup=article_buttons(language))
-
-
-
-
-
-
-
-@dp.callback_query_handler(text=['services'])
-async def article_handler(call: types.CallbackQuery, callback_data: dict):
-    language = language_info(call.from_user.id)
-    # call.data = callback_data
-    print("CALL DATA: ", call.data)
-    print("CALLback DATA: ", callback_data)
-    # await state.update_data({
-    #     'language': language,
-    #     'level': 'article'
-    # })
-
+@dp.message_handler(Text(equals=["Tayyor maqolani chop etish", "Publishing a ready-made article", "Публикация готовой статьи"]))
+async def document_handler(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language,
+        'level': 'document'
+    })
     if language == 'uz':
-        await call.message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=article_buttons(language))
+        await message.answer("Faylni yuklang!", reply_markup=cancel(language))
     elif language == 'en':
-        await call.message.answer("Thank you! Your opinion is important to us!", reply_markup=article_buttons(language))
+        await message.answer("Upload file!", reply_markup=cancel(language))
     else:
-        await call.message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=article_buttons(language))
-    await call.answer()
+        await message.answer("Upload file(ru)!", reply_markup=cancel(language))
 
+    await Level.document.set()
 
-
-
-
-
-@dp.callback_query_handler(text='article')
-async def patent_handler(call: types.CallbackQuery, callback_data: dict):
-    language = language_info(call.from_user.id)
-    
-    # await state.update_data({
-    #     'language': language,
-    #     'level': 'patent'
-    # })
-
+def confirm(language):
     if language == 'uz':
-        await call.message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=patent_buttons(language))
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Tasdiqlash", callback_data="confirm"),
+            types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+        )
     elif language == 'en':
-        await call.message.answer("Thank you! Your opinion is important to us!", reply_markup=patent_buttons(language))
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Confirm", callback_data="confirm"),
+            types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+        )
     else:
-        await call.message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=patent_buttons(language))
-    await call.answer()
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
+            types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+        )
+    
+
+@dp.message_handler(state=Level.document, content_types=types.ContentType.DOCUMENT)
+async def document_get(message:types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'document': message.document.file_id
+    })
+    # send "confirm button"
+    if language == 'uz':
+        await message.answer("Maqolani tasdiqlaysizmi?", reply_markup=confirm(language))
+    elif language == 'en':
+        await message.answer("Do you confirm article?", reply_markup=confirm(language))
+    else:
+        await message.answer("Do you confirm article(ru)?", reply_markup=confirm(language))
+
+    await Level.confirm.set()
+
+# @dp.callback_query_handler(text="confirm", state=Level.document)
+# async def document_confirm(call:types.CallbackQuery, state:FSMContext):
+#     language = language_info(call.from_user.id)
+#     data = await state.get_data()
+#     await call.message.answer_document(data['document'])
+#     if language == 'uz':
+#         await call.message.answer("✅ Maqola yuklandi!")
+#     elif language == 'en':
+#         await call.message.answer("✅ Article uploaded!")
+#     else:
+#         await call.message.answer("✅ Article uploaded(ru)!")
+#     await state.finish()
+
+
+# @dp.callback_query_handler(text="cancel", state=Level.document)
+# async def document_cancel(call:types.CallbackQuery, state:FSMContext):
+#     language = language_info(call.from_user.id)
+#     if language == 'uz':
+#         await call.message.answer("❌ Maqola yuklanmadi!")
+#     elif language == 'en':
+#         await call.message.answer("❌ Article not uploaded!")
+#     else:
+#         await call.message.answer("❌ Article not uploaded(ru)!")
+#     await state.finish()
+#     from loader import bot
+#     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
+
+
 
 
