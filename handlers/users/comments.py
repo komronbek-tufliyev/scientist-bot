@@ -11,7 +11,7 @@ class Comment(StatesGroup):
 
 
 ############# Write  Comment  Button Type  #################
-@dp.message_handler(text=["✍️ Sharh qoldiring", "✍️ Оставить отзыв", "✍️ Leave a feedback"])
+@dp.message_handler(text=["✍️ Aloqa", "✍️ Контакт", "✍️ Contact"])
 async def begin(message:types.Message):
     language = language_info(message.from_user.id)
     if language == 'uz':
@@ -55,3 +55,5 @@ async def comment_get(message:types.Message, state:FSMContext):
             await message.answer("😇 Спасибо за ваш комментарий!")
             await message.answer("✅ Добро пожаловать в главное меню\n" \
                                  f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)
+            
+        await state.finish()

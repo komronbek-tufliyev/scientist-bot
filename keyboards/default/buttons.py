@@ -105,7 +105,7 @@ def services(language):
 
 
 def article_buttons(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True)
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     if language == 'uz':
         button.add(
             InlineKeyboardButton('OAK uchun', callback_data=article_callback.new(data='oak')), 
@@ -136,7 +136,7 @@ def article_buttons(language):
 
 
 def patent_buttons(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True)
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     if language == 'uz':
         button.add(
             InlineKeyboardButton('OAK uchun', callback_data='oak'), 
