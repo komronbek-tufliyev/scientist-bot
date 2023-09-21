@@ -1,9 +1,11 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardMarkup, KeyboardButton
 from aiogram.utils.callback_data import CallbackData
 from api import *
+from data.config import ADMINS
+
 
 # Language buttons
-choose_language = ReplyKeyboardMarkup(resize_keyboard=True )
+choose_language = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 choose_language.insert(KeyboardButton('🇺🇿 O\'zbekcha')).insert(KeyboardButton('🇷🇺 Русский')).insert(KeyboardButton('🇬🇧 English'))
 
 # Main menu buttons
@@ -47,7 +49,7 @@ def categories(language):
 
 ############## Button Settings
 def settings(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True, )
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     button.row(InlineKeyboardButton(text="🇺🇿 O'zbekcha"), InlineKeyboardButton(text="🇷🇺 Русский"), InlineKeyboardButton(text="🇬🇧 English"))
     if language == 'uz':
         # return to main menu
@@ -62,7 +64,7 @@ def settings(language):
 
 ############## Button Comment ##############
 def cancel(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True, )
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     if language == 'uz':
         # cancel
         button.row(InlineKeyboardButton(text="❌ Bekor qilish",))
@@ -164,3 +166,28 @@ def patent_buttons(language):
         
 
     return button
+
+
+def write_article(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    if language == 'uz':
+        button.add(
+            InlineKeyboardButton('Yozib berish', callback_data='yozish'),
+            InlineKeyboardButton('Yozib berish va chop etish', call_back_data='yozish_chop'),
+            InlineKeyboardButton('Tayyor maqolani chop etish', call_back_data='chop_etish'),
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+        )
+    elif language == 'en':
+        button.add(
+            InlineKeyboardButton('Writing', callback_data='yozish'),
+            InlineKeyboardButton('Writing and publishing', call_back_data='yozish_chop'),
+            InlineKeyboardButton('Publishing a ready-made article', call_back_data='chop_etish'),
+            InlineKeyboardButton('🔝 Return to main menu')
+        )
+    else:
+        button.add(
+            InlineKeyboardButton('Написание', callback_data='yozish'),
+            InlineKeyboardButton('Написание и публикация', call_back_data='yozish_chop'),
+            InlineKeyboardButton('Публикация готовой статьи', call_back_data='chop_etish'),
+            InlineKeyboardButton('🔝 Вернуться в главное меню')
+        )
