@@ -42,7 +42,9 @@ async def comment_get(message:types.Message, state:FSMContext):
 
         await state.finish()
     else:
-        await bot.forward_message(message_id=message.message_id, chat_id=ADMINS[0], from_chat_id=message.chat.id)
+        for admin in ADMINS:
+            await bot.forward_message(message_id=message.message_id, chat_id=admin, from_chat_id=message.chat.id)
+        # await bot.forward_message(message_id=message.message_id, chat_id=ADMINS[0], from_chat_id=message.chat.id)
         if language == 'uz':
             await message.answer("😇 Fikringiz uchun rahmat!")
             await message.answer("✅ Bosh menyuga xush kelibsiz\n" \
