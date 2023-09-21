@@ -191,3 +191,36 @@ def write_article(language):
             InlineKeyboardButton('Публикация готовой статьи', call_back_data='chop_etish'),
             InlineKeyboardButton('🔝 Вернуться в главное меню')
         )
+
+    return button
+
+
+
+def status(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    if language == 'uz':
+        button.add(
+            InlineKeyboardButton('Texnika', callback_data='texnika'),
+            InlineKeyboardButton('Pedagogika', callback_data='pedagogika'),
+            InlineKeyboardButton('Iqtisodiyot', callback_data='iqtisod'),
+            InlineKeyboardButton('Tibbiyot', callback_data='tibbiyot'),
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+        )
+    elif language == 'en':
+        button.add(
+            InlineKeyboardButton('Technology', callback_data='texnika'),
+            InlineKeyboardButton('Pedagogy', callback_data='pedagogika'),
+            InlineKeyboardButton('Economics', callback_data='iqtisod'),
+            InlineKeyboardButton('Medicine', callback_data='tibbiyot'),
+            InlineKeyboardButton('🔝 Return to main menu')
+        )
+    else:
+        button.add(
+            InlineKeyboardButton('Техника', callback_data='texnika'),
+            InlineKeyboardButton('Педагогика', callback_data='pedagogika'),
+            InlineKeyboardButton('Экономика', callback_data='iqtisod'),
+            InlineKeyboardButton('Медицина', callback_data='tibbiyot'),
+            InlineKeyboardButton('🔝 Вернуться в главное меню')
+        )
+    return button
+
