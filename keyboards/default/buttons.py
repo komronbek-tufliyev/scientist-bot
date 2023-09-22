@@ -10,11 +10,11 @@ choose_language.insert(KeyboardButton('🇺🇿 O\'zbekcha')).insert(KeyboardBut
 
 # Main menu buttons
 main_uz = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_uz.insert(KeyboardButton(text="📝 Xizmatlar")).row(KeyboardButton(text="📖 Buyurtmalarim"), KeyboardButton(text="⚙️ Sozlamalar")).insert(KeyboardButton(text="✍️ Aloqa"))
+main_uz.insert(KeyboardButton(text="📝 Xizmatlar")).row(KeyboardButton(text="🛒 Savat"), KeyboardButton(text="⚙️ Sozlamalar")).insert(KeyboardButton(text="✍️ Aloqa"))
 main_ru = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_ru.insert(KeyboardButton(text="📝 Услуги")).row(KeyboardButton(text="📖 Мои заказы"), KeyboardButton(text="⚙️ Настройки")).insert(KeyboardButton(text="✍️ Контакт"))
+main_ru.insert(KeyboardButton(text="📝 Услуги")).row(KeyboardButton(text="🛒 Корзина"), KeyboardButton(text="⚙️ Настройки")).insert(KeyboardButton(text="✍️ Контакт"))
 main_en = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-main_en.insert(KeyboardButton(text="📝 Services")).row(KeyboardButton(text="📖 My orders"), KeyboardButton(text="⚙️ Settings")).insert(KeyboardButton(text="✍️ Contact"))
+main_en.insert(KeyboardButton(text="📝 Services")).row(KeyboardButton(text="🛒 Basket"), KeyboardButton(text="⚙️ Settings")).insert(KeyboardButton(text="✍️ Contact"))
 
 
 # Callback data

@@ -4,6 +4,7 @@ class Level(StatesGroup):
     level = State()
     services = State()
     article = State()
+    basket = State()
     patent = State()
     journal = State()
     conference = State()

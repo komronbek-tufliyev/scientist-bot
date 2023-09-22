@@ -223,6 +223,38 @@ async def document_get(message:types.Message, state:FSMContext):
 
     await Level.confirm.set()
 
+
+@dp.callback_query_handler(text="confirm", state=Level.confirm)
+async def document_confirm(call:types.CallbackQuery, state:FSMContext):
+    language = language_info(call.from_user.id)
+    data = await state.get_data()
+    await call.message.answer_document(data['document'])
+    if language == 'uz':
+        await call.message.answer("✅ Maqola yuklandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Article uploaded!")
+    else:
+        await call.message.answer("✅ Article uploaded(ru)!")
+    await state.finish()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # @dp.callback_query_handler(text="confirm", state=Level.document)
 # async def document_confirm(call:types.CallbackQuery, state:FSMContext):
 #     language = language_info(call.from_user.id)

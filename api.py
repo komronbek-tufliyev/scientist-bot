@@ -75,4 +75,12 @@ def get_all_categories() -> list:
 
 
 
+###### GET Basket ######
+def get_basket(telegram_id: int) -> list:
+    endpoint: str = f"{BASE_URL}/uz/api/orders/?telegram_id={telegram_id}"
+    response = requests.get(url=endpoint, timeout=5)
+    if response.status_code != 200:
+        return None
+    response_data = json.loads(response.text)
+    return response_data
 
