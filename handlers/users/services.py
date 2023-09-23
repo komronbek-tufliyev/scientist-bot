@@ -187,7 +187,7 @@ async def document_handler(message: types.Message, state:FSMContext):
     elif language == 'en':
         await message.answer("Upload file!", reply_markup=cancel(language))
     else:
-        await message.answer("Upload file(ru)!", reply_markup=cancel(language))
+        await message.answer("Загрузить файл!", reply_markup=cancel(language))
 
     await Level.document.set()
 
@@ -221,7 +221,7 @@ async def document_get(message:types.Message, state:FSMContext):
     elif language == 'en':
         await message.answer("Do you confirm article?", reply_markup=confirm(language))
     else:
-        await message.answer("Do you confirm article(ru)?", reply_markup=confirm(language))
+        await message.answer("Вы подтверждаете статью?", reply_markup=confirm(language))
 
     await Level.confirm.set()
 
@@ -237,7 +237,7 @@ async def document_confirm(call:types.CallbackQuery, state:FSMContext):
     elif language == 'en':
         await call.message.answer("✅ Article uploaded!")
     else:
-        await call.message.answer("✅ Article uploaded(ru)!")
+        await call.message.answer("✅ Статья загружена!")
     await state.finish()
 
 
@@ -249,5 +249,5 @@ async def document_cancel(call:types.CallbackQuery, state:FSMContext):
     elif language == 'en':
         await call.message.answer("❌ Article not uploaded!")
     else:
-        await call.message.answer("❌ Article not uploaded(ru)!")
+        await call.message.answer("❌ Статья не загружена!")
     await state.finish()
