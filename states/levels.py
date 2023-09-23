@@ -10,6 +10,7 @@ class Level(StatesGroup):
     conference = State()
     document = State()
     confirm = State()
+    technique = State()
     comment = State()
     contact = State()
     order = State()

@@ -5,7 +5,7 @@ from api import *
 from states import Level, Language
 from aiogram.utils.callback_data import CallbackData, CallbackDataFilter
 from aiogram.dispatcher.filters import Text 
-from loader import dp
+from loader import dp, bot
 from aiogram.types import ContentTypes
 
 
@@ -65,11 +65,28 @@ async def patent_handler(message: types.Message, state:FSMContext):
         'level': 'patent'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=patent_buttons(language))
+        await message.answer("Bot test rejimida ishlamoqda. Iltimos, keyinroq urinib ko'ring!")
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=patent_buttons(language))
+        await message.answer("The bot is working in test mode. Please try again later!")
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=patent_buttons(language))
+        await message.answer("Бот работает в тестовом режиме. Пожалуйста, попробуйте позже!")
+    await state.finish()
+
+
+
+@dp.message_handler(Text(equals=['Serifikat', 'Сертификат', 'Certificate']))
+async def certificate_handler(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language,
+        'level': 'certificate'
+    })
+    if language == 'uz':
+        await message.answer("Bot test rejimida ishlamoqda. Iltimos, keyinroq urinib ko'ring!")
+    elif language == 'en':
+        await message.answer("The bot is working in test mode. Please try again later!")
+    else:
+        await message.answer("Бот работает в тестовом режиме. Пожалуйста, попробуйте позже!")
     await state.finish()
 
 
@@ -183,11 +200,11 @@ async def document_handler(message: types.Message, state:FSMContext):
         'level': 'document'
     })
     if language == 'uz':
-        await message.answer("Faylni yuklang!", reply_markup=cancel(language))
+        await message.answer("Faylni yuklang!")
     elif language == 'en':
-        await message.answer("Upload file!", reply_markup=cancel(language))
+        await message.answer("Upload file!")
     else:
-        await message.answer("Загрузить файл!", reply_markup=cancel(language))
+        await message.answer("Загрузить файл!")
 
     await Level.document.set()
 
@@ -251,3 +268,53 @@ async def document_cancel(call:types.CallbackQuery, state:FSMContext):
     else:
         await call.message.answer("❌ Статья не загружена!")
     await state.finish()
+
+
+
+@dp.message_handler(Text(equals=["Texnika", "Техника", "Technique"]))
+async def technique_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"  # Shartnoma faylini joylash manzili
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    # "Tushundim" degan buttonni yaratish
+    def Tasdiqlash(language):
+        if language == 'uz':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Tasdiqlash", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Confirm", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+            )
+        else:
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+            )
+    shart = Tasdiqlash(language)
+
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=shart)
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=shart)
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
+
+@dp.callback_query_handler(text = "agreement_accepted", state=Level.technique)
+async def agreement_accepted(call: types.CallbackQuery, state:FSMContext):
+    language = language_info(call.from_user.id)
+    data = await state.get_data()
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
+

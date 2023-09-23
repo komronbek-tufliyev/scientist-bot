@@ -138,43 +138,10 @@ def article_buttons(language):
             # InlineKeyboardButton('🔝 Вернуться в главное меню'),
             InlineKeyboardButton('⬅️ Назад')
         )
-        
-    # print(button)
+    
+    
     return button
 
-
-def patent_buttons(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
-    if language == 'uz':
-        button.add(
-            InlineKeyboardButton('OAK uchun', callback_data='oak'), 
-            InlineKeyboardButton('Respublika konferensiya uchun', callback_data='conference'),
-            InlineKeyboardButton('Xalqaro konferensiya uchun', callback_data='international_conference'),
-            InlineKeyboardButton("Xalqaro ilmiy jurnal uchun", callback_data="international_journal"),
-            # InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
-            InlineKeyboardButton('⬅️ Orqaga')
-        )
-    elif language == 'en':
-        button.add(
-            InlineKeyboardButton('For OAK', callback_data='oak'), 
-            InlineKeyboardButton('For Republic conference', callback_data='conference'),
-            InlineKeyboardButton('For International conference', callback_data='international_conference'),
-            InlineKeyboardButton("For International scientific journal", callback_data="international_journal"),
-            # InlineKeyboardButton('🔝 Return to main menu'),
-            InlineKeyboardButton('⬅️ Back')
-        )
-    else:
-        button.add(
-            InlineKeyboardButton('Для ОАК', callback_data='oak'), 
-            InlineKeyboardButton('Для Республиканской конференции', callback_data='conference'),
-            InlineKeyboardButton('Для Международной конференции', callback_data='international_conference'),
-            InlineKeyboardButton("Для Международного научного журнала", callback_data="international_journal"),
-            # InlineKeyboardButton('🔝 Вернуться в главное меню'),
-            InlineKeyboardButton('⬅️ Назад')
-        )
-        
-
-    return button
 
 
 def write_article(language):
@@ -245,18 +212,21 @@ def share_contact(language):
     if language == 'uz':
         button.add(
             KeyboardButton(text="📞 Telefon raqamni yuborish", request_contact=True),
-            KeyboardButton(text="🔙 Ortga")
+            KeyboardButton(text="⬅️ Orqaga")
         )
     elif language == 'en':
         button.add(
             KeyboardButton(text="📞 Send phone number", request_contact=True),
-            KeyboardButton(text="🔙 Back")
+            KeyboardButton(text="⬅️ Back")
         )
     else:
         button.add(
             KeyboardButton(text="📞 Отправить номер телефона", request_contact=True),
-            KeyboardButton(text="🔙 Назад")
+            KeyboardButton(text="⬅️ Назад")
         )
 
     return button
+
+
+
 

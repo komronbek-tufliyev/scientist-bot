@@ -72,16 +72,50 @@ async def main_menu_handler(message:types.Message):
                              f"💻 Статьи, написание журналов, издательские услуги в местных и международных журналах! Вы начинайте заказывать?", reply_markup=main_ru)
 
 
-# go back previous state (step)
-@dp.message_handler(text=["🔙 Orqaga", "🔙 Назад", "🔙 Back"])
-async def back_handler(message:types.Message, state:FSMContext):
-    """
-        Agar foydalanuvchi oldingi qadimgi holatga qaytishni istasa, ushbu funksiya ishlatiladi. Va oldingi stateda yuborilishi kerak bo'lgan handler chaqiriladi.
-    """
-    logging.info(f"State: {await state.get_state()}")
-    print(f"State: {await state.get_state()}")
-    # await Level.previous()
-    await state.set_state(Level.previous())
+# # go back previous state (step)
+# @dp.message_handler(text=["⬅️ Orqaga", "⬅️ Назад", "⬅️ Back"])
+# async def back_handler(message:types.Message, state:FSMContext):
+#     """
+#         Agar foydalanuvchi oldingi qadimgi holatga qaytishni istasa, ushbu funksiya ishlatiladi. Va oldingi stateda yuborilishi kerak bo'lgan handler chaqiriladi.
+#     """
+#     logging.info(f"State: {await state.get_state()}")
+#     print(f"State: {await state.get_state()}")
+#     # await Level.previous()
+#     if await Level.previous():
+#         if not Language.language:
+#             print("No previous lang state")
+#             await state.finish()
+
+#         else:
+#             await Language.language.set()
+#         print("No previous state")
+#     else:
+#         await state.set_state(await Level.previous())
+#     print(f"State after: {await state.get_state()}")
+#     # await dp.current_state().reset_state(with_data=False)
+    
+    
+# @dp.message_handler(text=["⬅️ Orqaga", "⬅️ Назад", "⬅️ Back"])
+# async def back_handler(message: types.Message, state: FSMContext):
+#     logging.info(f"State: {await state.get_state()}")
+    
+#     previous_state = await Level.previous()
+    
+#     if previous_state is not None:
+#         logging.info("Going to the previous state")
+#         if not Language.language:
+#             print("No previous lang state")
+#             await state.finish()
+#         else:
+#             logging.info("Setting Language:language state")
+#             await Language.language.set()
+#     else:
+#         logging.info("No previous state found")
+#         await state.finish()
+
+#     print(f"State after: {await state.get_state()}")
+#     # await dp.current_state().reset_state(with_data=False)
+
     
 
 
@@ -121,8 +155,8 @@ async def get_contact(message: types.Message):
     change_phone(telegram_id=message.from_user.id, phone=phone)
     
     if language == 'uz':
-        await message.answer("📞 Telefon raqamingiz qabul qilindi. Tez orada siz bilan bog'lanamiz!")
+        await message.answer("📞 Telefon raqamingiz qabul qilindi. Rahmat!")
     elif language == 'en':
-        await message.answer("📞 Your phone number has been received. We will contact you shortly!")
+        await message.answer("📞 Your phone number has been received. Thank you!")
     else:
-        await message.answer("📞 Ваш номер телефона получен. Мы свяжемся с вами в ближайшее время!")
+        await message.answer("📞 Ваш номер телефона получен. Спасибо!")
