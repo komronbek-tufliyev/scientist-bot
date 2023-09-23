@@ -35,9 +35,9 @@ def change_language(telegram_id, language:str):
 
 #################### Change Phone Number ##################
 def change_phone(telegram_id, phone:str):
-    response = requests.post(f"{BASE_URL}/uz/api/phone/", data={
+    response = requests.post(f"{BASE_URL}/uz/api/change-phone/", data={
         'telegram_id': telegram_id,
-        'phone': phone
+        'phone_number': phone
     })
     return response.status_code
 
