@@ -2,8 +2,7 @@ from aiogram import types
 from keyboards.default.buttons import *
 from aiogram.dispatcher import FSMContext
 from api import *
-from states import Language
-from states import Level
+from states import Level, Language
 from aiogram.utils.callback_data import CallbackData, CallbackDataFilter
 from aiogram.dispatcher.filters import Text 
 from loader import dp
@@ -12,7 +11,7 @@ from aiogram.types import ContentTypes
 
 
 
-@dp.message_handler(Text(equals=['📝 Услуги', '📝 Xizmatlar', '📝 Services']))
+@dp.message_handler(Text(equals=['📝 Услуги', '📝 Xizmatlar', '📝 Services']), state='*')
 async def services_handler(message: types.Message, state:FSMContext):
     language = language_info(message.from_user.id)
     await state.update_data({
@@ -25,11 +24,14 @@ async def services_handler(message: types.Message, state:FSMContext):
         await message.answer("Our services", reply_markup=services(language))
     else:
         await message.answer("Наши услуги", reply_markup=services(language))
-    await state.finish()
 
 
+    # await 
 
-
+# @dp.message_handler(state=Level.services, )
+# async def services2_handler(message: types.Message, state:FSMContext):
+#     await message.answer_poll("Poll", ["1", "2", "3", "4", "5"], is_anonymous=False, type=types.PollType.REGULAR, allows_multiple_answers=True, correct_option_id=0, explanation="Explanation", explanation_parse_mode=types.ParseMode.MARKDOWN, open_period=10, close_date=10, is_closed=False, disable_notification=False, reply_to_message_id=0, reply_markup=None, timeout=None, reply=False, dont_parse_links=False, allow_sending_without_reply=False)
+#     await state.finish()
 
 
 
@@ -224,6 +226,7 @@ async def document_get(message:types.Message, state:FSMContext):
     await Level.confirm.set()
 
 
+
 @dp.callback_query_handler(text="confirm", state=Level.confirm)
 async def document_confirm(call:types.CallbackQuery, state:FSMContext):
     language = language_info(call.from_user.id)
@@ -238,50 +241,13 @@ async def document_confirm(call:types.CallbackQuery, state:FSMContext):
     await state.finish()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @dp.callback_query_handler(text="confirm", state=Level.document)
-# async def document_confirm(call:types.CallbackQuery, state:FSMContext):
-#     language = language_info(call.from_user.id)
-#     data = await state.get_data()
-#     await call.message.answer_document(data['document'])
-#     if language == 'uz':
-#         await call.message.answer("✅ Maqola yuklandi!")
-#     elif language == 'en':
-#         await call.message.answer("✅ Article uploaded!")
-#     else:
-#         await call.message.answer("✅ Article uploaded(ru)!")
-#     await state.finish()
-
-
-# @dp.callback_query_handler(text="cancel", state=Level.document)
-# async def document_cancel(call:types.CallbackQuery, state:FSMContext):
-#     language = language_info(call.from_user.id)
-#     if language == 'uz':
-#         await call.message.answer("❌ Maqola yuklanmadi!")
-#     elif language == 'en':
-#         await call.message.answer("❌ Article not uploaded!")
-#     else:
-#         await call.message.answer("❌ Article not uploaded(ru)!")
-#     await state.finish()
-#     from loader import bot
-#     await bot.delete_message(chat_id=call.message.chat.id, message_id=call.message.message_id)
-
-
-
-
+@dp.callback_query_handler(text="cancel", state=Level.confirm)
+async def document_cancel(call:types.CallbackQuery, state:FSMContext):
+    language = language_info(call.from_user.id)
+    if language == 'uz':
+        await call.message.answer("❌ Maqola yuklanmadi!")
+    elif language == 'en':
+        await call.message.answer("❌ Article not uploaded!")
+    else:
+        await call.message.answer("❌ Article not uploaded(ru)!")
+    await state.finish()

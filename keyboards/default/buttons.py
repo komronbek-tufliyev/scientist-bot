@@ -53,12 +53,12 @@ def settings(language):
     button.row(InlineKeyboardButton(text="🇺🇿 O'zbekcha"), InlineKeyboardButton(text="🇷🇺 Русский"), InlineKeyboardButton(text="🇬🇧 English"))
     if language == 'uz':
         # return to main menu
-        button.row(InlineKeyboardButton(text="🔝 Bosh menyuga qaytish",))
+        button.insert(InlineKeyboardButton(text="🔝 Bosh menyuga qaytish")).insert(KeyboardButton(text="Kontaktni ulashish", request_contact=True),)
     elif language == 'en':
         # return to main menu
-        button.row(InlineKeyboardButton(text="🔝 Return to main menu",))
+        button.row(InlineKeyboardButton(text="🔝 Return to main menu")).add(KeyboardButton(text="Share contact", request_contact=True),)
     else:
-        button.row(InlineKeyboardButton(text="🔝 Вернуться в главное меню",))
+        button.row(InlineKeyboardButton(text="🔝 Вернуться в главное меню",)).add(KeyboardButton(text="Поделиться контактом", request_contact=True),)
 
     return button
 
@@ -85,24 +85,27 @@ def services(language):
             InlineKeyboardButton('Maqola', callback_data=services_callback.new(data='article', action='article'))).add( 
             InlineKeyboardButton('DGU', callback_data=services_callback.new(data='patent', action='patent'))).add( 
             InlineKeyboardButton('Sertifikat', callback_data=services_callback.new(data='certificate', action='certificate'))).add( 
-            InlineKeyboardButton(text="🔝 Bosh menyuga qaytish")
+            InlineKeyboardButton(text="🔝 Bosh menyuga qaytish"),
+            InlineKeyboardButton(text="⬅️ Orqaga")
             )
     elif language == 'en':
         button.add(
             InlineKeyboardButton('Article', callback_data=services_callback.new(data='article', action='article')), 
             InlineKeyboardButton('Patent', callback_data=services_callback.new(data='patent', action='patent')), 
             InlineKeyboardButton('Certificate', callback_data=services_callback.new(data='certificate', action='certificate')), 
-            InlineKeyboardButton(text="🔝 Return to main menu",)
+            InlineKeyboardButton(text="🔝 Return to main menu",),
+            InlineKeyboardButton(text="⬅️ Back")
         )
     else:
         button.add(
             InlineKeyboardButton('Статья', callback_data=services_callback.new(data='article', action='article')), 
             InlineKeyboardButton('Патент', callback_data=services_callback.new(data='patent', action='patent')), 
             InlineKeyboardButton('Сертификат', callback_data=services_callback.new(data='certificate', action='certificate')), 
-            InlineKeyboardButton(text="🔝 Вернуться в главное меню",)
+            InlineKeyboardButton(text="🔝 Вернуться в главное меню",),
+            InlineKeyboardButton(text="⬅️ Назад")
         )
 
-    print(button)
+    # print(button)
     return button
 
 
@@ -114,7 +117,8 @@ def article_buttons(language):
             InlineKeyboardButton('Respublika konferensiya uchun', callback_data=article_callback.new(data='conference')),
             InlineKeyboardButton('Xalqaro konferensiya uchun', callback_data=article_callback.new(data='international_conference')),
             InlineKeyboardButton("Xalqaro ilmiy jurnal uchun", callback_data=article_callback.new(data='international_journal')),
-            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
+            InlineKeyboardButton('⬅️ Orqaga')
         )
     elif language == 'en':
         button.add(
@@ -122,7 +126,8 @@ def article_buttons(language):
             InlineKeyboardButton('For Republic conference', callback_data=article_callback.new(data='conference')),
             InlineKeyboardButton('For International conference', callback_data=article_callback.new(data='international_conference')),
             InlineKeyboardButton("For International scientific journal", callback_data=article_callback.new(data='international_journal')),
-            InlineKeyboardButton('🔝 Return to main menu')
+            InlineKeyboardButton('🔝 Return to main menu'),
+            InlineKeyboardButton('⬅️ Back')
         )
     else:
         button.add(
@@ -130,10 +135,11 @@ def article_buttons(language):
             InlineKeyboardButton('Для Республиканской конференции', callback_data=article_callback.new(data='conference')),
             InlineKeyboardButton('Для Международной конференции', callback_data=article_callback.new(data='international_conference')),
             InlineKeyboardButton("Для Международного научного журнала", callback_data=article_callback.new(data='international_journal')),
-            InlineKeyboardButton('🔝 Вернуться в главное меню')
+            InlineKeyboardButton('🔝 Вернуться в главное меню'),
+            InlineKeyboardButton('⬅️ Назад')
         )
         
-    print(button)
+    # print(button)
     return button
 
 
@@ -145,7 +151,8 @@ def patent_buttons(language):
             InlineKeyboardButton('Respublika konferensiya uchun', callback_data='conference'),
             InlineKeyboardButton('Xalqaro konferensiya uchun', callback_data='international_conference'),
             InlineKeyboardButton("Xalqaro ilmiy jurnal uchun", callback_data="international_journal"),
-            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
+            InlineKeyboardButton('⬅️ Orqaga')
         )
     elif language == 'en':
         button.add(
@@ -153,7 +160,8 @@ def patent_buttons(language):
             InlineKeyboardButton('For Republic conference', callback_data='conference'),
             InlineKeyboardButton('For International conference', callback_data='international_conference'),
             InlineKeyboardButton("For International scientific journal", callback_data="international_journal"),
-            InlineKeyboardButton('🔝 Return to main menu')
+            InlineKeyboardButton('🔝 Return to main menu'),
+            InlineKeyboardButton('⬅️ Back')
         )
     else:
         button.add(
@@ -161,7 +169,8 @@ def patent_buttons(language):
             InlineKeyboardButton('Для Республиканской конференции', callback_data='conference'),
             InlineKeyboardButton('Для Международной конференции', callback_data='international_conference'),
             InlineKeyboardButton("Для Международного научного журнала", callback_data="international_journal"),
-            InlineKeyboardButton('🔝 Вернуться в главное меню')
+            InlineKeyboardButton('🔝 Вернуться в главное меню'),
+            InlineKeyboardButton('⬅️ Назад')
         )
         
 
@@ -175,21 +184,24 @@ def write_article(language):
             InlineKeyboardButton('Yozib berish', callback_data='yozish'),
             InlineKeyboardButton('Yozib berish va chop etish', call_back_data='yozish_chop'),
             InlineKeyboardButton('Tayyor maqolani chop etish', call_back_data='chop_etish'),
-            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
+            InlineKeyboardButton('⬅️ Orqaga')
         )
     elif language == 'en':
         button.add(
             InlineKeyboardButton('Writing', callback_data='yozish'),
             InlineKeyboardButton('Writing and publishing', call_back_data='yozish_chop'),
             InlineKeyboardButton('Publishing a ready-made article', call_back_data='chop_etish'),
-            InlineKeyboardButton('🔝 Return to main menu')
+            InlineKeyboardButton('🔝 Return to main menu'),
+            InlineKeyboardButton('⬅️ Back')
         )
     else:
         button.add(
             InlineKeyboardButton('Написание', callback_data='yozish'),
             InlineKeyboardButton('Написание и публикация', call_back_data='yozish_chop'),
             InlineKeyboardButton('Публикация готовой статьи', call_back_data='chop_etish'),
-            InlineKeyboardButton('🔝 Вернуться в главное меню')
+            InlineKeyboardButton('🔝 Вернуться в главное меню'),
+            InlineKeyboardButton('⬅️ Назад')
         )
 
     return button
@@ -204,7 +216,8 @@ def status(language):
             InlineKeyboardButton('Pedagogika', callback_data='pedagogika'),
             InlineKeyboardButton('Iqtisodiyot', callback_data='iqtisod'),
             InlineKeyboardButton('Tibbiyot', callback_data='tibbiyot'),
-            InlineKeyboardButton('🔝 Bosh menyuga qaytish')
+            InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
+            InlineKeyboardButton('⬅️ Orqaga')
         )
     elif language == 'en':
         button.add(
@@ -212,7 +225,8 @@ def status(language):
             InlineKeyboardButton('Pedagogy', callback_data='pedagogika'),
             InlineKeyboardButton('Economics', callback_data='iqtisod'),
             InlineKeyboardButton('Medicine', callback_data='tibbiyot'),
-            InlineKeyboardButton('🔝 Return to main menu')
+            InlineKeyboardButton('🔝 Return to main menu'),
+            InlineKeyboardButton('⬅️ Back')
         )
     else:
         button.add(
@@ -220,7 +234,29 @@ def status(language):
             InlineKeyboardButton('Педагогика', callback_data='pedagogika'),
             InlineKeyboardButton('Экономика', callback_data='iqtisod'),
             InlineKeyboardButton('Медицина', callback_data='tibbiyot'),
-            InlineKeyboardButton('🔝 Вернуться в главное меню')
+            InlineKeyboardButton('🔝 Вернуться в главное меню'),
+            InlineKeyboardButton('⬅️ Назад')
         )
+    return button
+
+
+def share_contact(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
+    if language == 'uz':
+        button.add(
+            KeyboardButton(text="📞 Telefon raqamni yuborish", request_contact=True),
+            KeyboardButton(text="🔙 Ortga")
+        )
+    elif language == 'en':
+        button.add(
+            KeyboardButton(text="📞 Send phone number", request_contact=True),
+            KeyboardButton(text="🔙 Back")
+        )
+    else:
+        button.add(
+            KeyboardButton(text="📞 Отправить номер телефона", request_contact=True),
+            KeyboardButton(text="🔙 Назад")
+        )
+
     return button
 

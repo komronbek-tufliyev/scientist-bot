@@ -16,17 +16,18 @@ from keyboards.default.buttons import *
 # async def bot_start(message: types.Message):
 #     await message.answer(f"Salom, {message.from_user.full_name}!")
 
-
+# Bu funksiya botni ishga tushurishda ishlatiladi. Va foydalanuvchini bazaga qo'shadi.
 @dp.message_handler(CommandStart())
 async def bot_start(message: types.Message):
     full_name = message.from_user.full_name
     username = message.from_user.username
     telegram_id = message.from_user.id
     # print(full_name, username, telegram_id)
-    print(message.from_user.to_python())
+    # print(message.from_user.to_python())
 
-    check = create_user(telegram_id, message.from_user.to_python())
-    print(check)
+    # ushbu funksiya api.py da yozilgan va foydalanuvchini bazada mavjud bo'lmasa, uni bazaga qo'shadi.
+    check = create_user(telegram_id, message.from_user.to_python()) 
+    # print(check)
     if check == 400:
         language = language_info(telegram_id)
         if language == 'uz':
@@ -46,6 +47,8 @@ async def bot_start(message: types.Message):
         create_user(telegram_id, message.from_user.to_python())
         await Language.language.set()
 
+
+# Bu funksiya foydalanuvchining tilini o'zgartirishda ishlatiladi. Qachonki foydalanuvchi botni ishga tushuradi, ushbu funksiya ishga tushadi.
 @dp.message_handler(state=Language.language)
 async def set_language_system(message: types.Message, state:FSMContext):
     if message.content_type == 'text':

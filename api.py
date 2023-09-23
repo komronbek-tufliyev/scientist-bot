@@ -17,10 +17,8 @@ def create_user(telegram_id: int, data: dict) -> dict:
         'language': data['language_code'],
     }
     response = requests.post(endpoint, json=payload)
-    print(response.status_code)
-    print(response.text)
     if response.status_code != 201:
-        return 
+        return None
     response_data = json.loads(response.text)
     return response_data
 
