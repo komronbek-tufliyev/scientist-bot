@@ -52,11 +52,6 @@ async def article_handler(message: types.Message, state:FSMContext):
 
 
 
-
-
-
-
-
 @dp.message_handler(Text(equals=['DGU', 'Патент', 'Patent']))
 async def patent_handler(message: types.Message, state:FSMContext):
     language = language_info(message.from_user.id)
@@ -271,6 +266,8 @@ async def document_cancel(call:types.CallbackQuery, state:FSMContext):
 
 
 
+##################### Texnika uchun shartnoma #####################
+
 @dp.message_handler(Text(equals=["Texnika", "Техника", "Technique"]))
 async def technique_handler(message: types.Message, state:FSMContext):
     agreement_path = "Share Data.pdf"  # Shartnoma faylini joylash manzili
@@ -284,12 +281,12 @@ async def technique_handler(message: types.Message, state:FSMContext):
     def Tasdiqlash(language):
         if language == 'uz':
             return types.InlineKeyboardMarkup(row_width=2).add(
-                types.InlineKeyboardButton(text="✅ Tasdiqlash", callback_data="confirm"),
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
             )
         elif language == 'en':
             return types.InlineKeyboardMarkup(row_width=2).add(
-                types.InlineKeyboardButton(text="✅ Confirm", callback_data="confirm"),
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
             )
         else:
@@ -306,8 +303,9 @@ async def technique_handler(message: types.Message, state:FSMContext):
     else:
         await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
 
-@dp.callback_query_handler(text = "agreement_accepted", state=Level.technique)
-async def agreement_accepted(call: types.CallbackQuery, state:FSMContext):
+
+@dp.callback_query_handler(text="agreement_accepted", state=Level.technique)
+async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
     language = language_info(call.from_user.id)
     data = await state.get_data()
     if language == 'uz':
@@ -318,3 +316,158 @@ async def agreement_accepted(call: types.CallbackQuery, state:FSMContext):
         await call.message.answer("✅ Соглашение подтверждено!")
     await state.finish()
 
+
+
+##################### Pedagogika uchun shartnoma #####################
+
+@dp.message_handler(Text(equals=["Pedaqogika", "Педагогика", "Pedagogy"]))
+async def pedagogy_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    # "Tushundim" degan buttonni yaratish
+    def Tasdiqlash(language):
+        if language == 'uz':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+            )
+        else:
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+            )
+    shart = Tasdiqlash(language)
+
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=shart)
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=shart)
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
+
+
+@dp.callback_query_handler(text="agreement_accepted", state=Level.pedagogy)
+async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
+    language = language_info(call.from_user.id)
+    data = await state.get_data()
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
+
+
+
+######################## Iqtisodiyot uchun shartnoma #####################
+
+@dp.message_handler(Text(equals=["Iqtisodiyot", "Экономика", "Economy"]))
+async def economy_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    # "Tushundim" degan buttonni yaratish
+    def Tasdiqlash(language):
+        if language == 'uz':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+            )
+        else:
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+            )
+    shart = Tasdiqlash(language)
+
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=shart)
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=shart)
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
+
+
+@dp.callback_query_handler(text="agreement_accepted", state=Level.economy)
+async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
+    language = language_info(call.from_user.id)
+    data = await state.get_data()
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
+
+
+
+############################# Tibbiyot uchun shartnoma #############################
+
+@dp.message_handler(Text(equals=["Tibbiyot", "Медицина", "Medicine"]))
+async def medicine_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    # "Tushundim" degan buttonni yaratish
+    def Tasdiqlash(language):
+        if language == 'uz':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+            )
+        else:
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+            )
+    shart = Tasdiqlash(language)
+
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=shart)
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=shart)
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
+
+
+@dp.callback_query_handler(text="agreement_accepted", state=Level.medicine)
+async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
+    language = language_info(call.from_user.id)
+    data = await state.get_data()
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
