@@ -203,6 +203,8 @@ async def document_handler(message: types.Message, state:FSMContext):
 
     await Level.document.set()
 
+
+
 def confirm(language):
     if language == 'uz':
         return types.InlineKeyboardMarkup(row_width=2).add(
@@ -356,6 +358,7 @@ async def pedagogy_handler(message: types.Message, state:FSMContext):
         await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
 
 
+
 @dp.callback_query_handler(text="agreement_accepted", state=Level.pedagogy)
 async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
     language = language_info(call.from_user.id)
@@ -459,8 +462,10 @@ async def medicine_handler(message: types.Message, state:FSMContext):
     else:
         await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
 
+    await Level.medicine.set()
 
-@dp.callback_query_handler(text="agreement_accepted", state=Level.medicine)
+
+@dp.callback_query_handler(text="shart", state=Level.medicine)
 async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
     language = language_info(call.from_user.id)
     data = await state.get_data()
