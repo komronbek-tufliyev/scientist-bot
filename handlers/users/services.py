@@ -52,24 +52,10 @@ async def article_handler(message: types.Message, state:FSMContext):
 
 
 
-@dp.message_handler(Text(equals=['DGU', 'Патент', 'Patent']))
-async def patent_handler(message: types.Message, state:FSMContext):
-    language = language_info(message.from_user.id)
-    await state.update_data({
-        'language': language,
-        'level': 'patent'
-    })
-    if language == 'uz':
-        await message.answer("Bot test rejimida ishlamoqda. Iltimos, keyinroq urinib ko'ring!")
-    elif language == 'en':
-        await message.answer("Where would you like to see the Patent?!")
-    else:
-        await message.answer("Бот работает в тестовом режиме. Пожалуйста, попробуйте позже!")
-    await state.finish()
 
 
 
-@dp.message_handler(Text(equals=['Serifikat', 'Сертификат', 'Certificate']))
+@dp.message_handler(Text(equals=['Sertifikat', 'Сертификат', 'Certificate']))
 async def certificate_handler(message: types.Message, state:FSMContext):
     language = language_info(message.from_user.id)
     await state.update_data({
