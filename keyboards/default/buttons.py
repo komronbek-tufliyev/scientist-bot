@@ -208,31 +208,6 @@ def status(language):
 
 
 
-# def Tasdiqlash(language):
-#     button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
-#     if language == 'uz':
-#         button.add(
-#             InlineKeyboardButton('Roziman', callback_data='tasdiqlash'),
-#             InlineKeyboardButton('Bekor qilish', callback_data='bekor_qilish'),
-#             # InlineKeyboardButton('🔝 Bosh menyuga qaytish'),
-#             InlineKeyboardButton('⬅️ Orqaga')
-#         )
-#     elif language == 'en':
-#         button.add(
-#             InlineKeyboardButton('Confirm', callback_data='tasdiqlash'),
-#             InlineKeyboardButton('Cancel', callback_data='bekor_qilish'),
-#             # InlineKeyboardButton('🔝 Return to main menu'),
-#             InlineKeyboardButton('⬅️ Back')
-#         )
-#     else:
-#         button.add(
-#             InlineKeyboardButton('Подтвердить', callback_data='tasdiqlash'),
-#             InlineKeyboardButton('Отменить', callback_data='bekor_qilish'),
-#             # InlineKeyboardButton('🔝 Вернуться в главное меню'),
-#             InlineKeyboardButton('⬅️ Назад')
-#         )
-#     return button
-
 
 def share_contact(language):
     button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)

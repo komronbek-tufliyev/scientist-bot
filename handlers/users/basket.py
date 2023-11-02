@@ -53,7 +53,7 @@ async def order(call: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(basket_keyboard.basket_callback.filter(item_id="cancel", action="cancel"), state=Level.basket)   
 async def cancel(call: types.CallbackQuery, state: FSMContext):
     language = language_info(call.from_user.id)
-    await call.message.answer("Aka Level basket")
+    await call.message.answer("Level basket")
     await call.message.answer("❌ Bekor qilish", reply_markup=main_uz)
     await state.reset_state()    
     await call.answer(cache_time=60) 
@@ -63,7 +63,7 @@ async def cancel(call: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(basket_keyboard.basket_callback.filter(item_id="cancel", action="cancel"), state=Level.order)   
 async def cancel(call: types.CallbackQuery, state: FSMContext):
     language = language_info(call.from_user.id)
-    await call.message.answer("Aka Level order")
+    await call.message.answer("Level order")
 
 
     await call.message.answer("❌ Bekor qilish", reply_markup=main_uz)
