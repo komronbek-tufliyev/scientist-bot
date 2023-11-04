@@ -207,6 +207,12 @@ def status(language):
     return button
 
 
+def patent(language):
+    button = ReplyKeyboardMarkup(resize_keyboard=True)
+    if language == 'uz':
+        button.add
+
+
 def share_contact(language):
     button = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
     if language == 'uz':

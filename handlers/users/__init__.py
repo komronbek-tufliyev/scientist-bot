@@ -3,6 +3,7 @@ from . import start
 from . import basket
 from . import settings
 from . import services
+from . import patents
 from . import comments
 
 # Leave this at the bottom

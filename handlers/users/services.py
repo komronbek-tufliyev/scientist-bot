@@ -43,15 +43,16 @@ async def article_handler(message: types.Message, state:FSMContext):
         'level': 'article'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=article_buttons(language))
+        await message.answer("Maqolangizni qayerda ko'rishni xohlaysiz?!", reply_markup=article_buttons(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=article_buttons(language))
+        await message.answer("Where would you like to see your article?!", reply_markup=article_buttons(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=article_buttons(language))
+        await message.answer("Где бы вы хотели видеть свою статью?!", reply_markup=article_buttons(language))
     await state.finish()
 
 
 
+<<<<<<< HEAD
 @dp.message_handler(Text(equals=['DGU', 'Патент', 'Patent']))
 async def patent_handler(message: types.Message, state:FSMContext):
     language = language_info(message.from_user.id)
@@ -70,6 +71,12 @@ async def patent_handler(message: types.Message, state:FSMContext):
 
 
 @dp.message_handler(Text(equals=['Serifikat', 'Сертификат', 'Certificate']))
+=======
+
+
+
+@dp.message_handler(Text(equals=['Sertifikat', 'Сертификат', 'Certificate']))
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
 async def certificate_handler(message: types.Message, state:FSMContext):
     language = language_info(message.from_user.id)
     await state.update_data({
@@ -94,11 +101,11 @@ async def oak_handler(message: types.Message, state:FSMContext):
         'level': 'oak'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=write_article(language))
+        await message.answer("Quyidagilardan birini tanlang 👇", reply_markup=write_article(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=write_article(language))
+        await message.answer("Choose one of the following 👇", reply_markup=write_article(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=write_article(language))
+        await message.answer("Выберите один из следующих 👇", reply_markup=write_article(language))
     await state.finish()
 
 
@@ -111,11 +118,11 @@ async def conference_handler(message: types.Message, state:FSMContext):
         'level': 'conference'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=write_article(language))
+        await message.answer("Quyidagilardan birini tanlang 👇", reply_markup=write_article(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=write_article(language))
+        await message.answer("Choose one of the following 👇", reply_markup=write_article(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=write_article(language))
+        await message.answer("Выберите один из следующих 👇", reply_markup=write_article(language))
     await state.finish()
 
 
@@ -127,11 +134,11 @@ async def international_conference_handler(message: types.Message, state:FSMCont
         'level': 'international_conference'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=write_article(language))
+        await message.answer("Quyidagilardan birini tanlang 👇", reply_markup=write_article(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=write_article(language))
+        await message.answer("Choose one of the following 👇", reply_markup=write_article(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=write_article(language))
+        await message.answer("Выберите один из следующих 👇", reply_markup=write_article(language))
     await state.finish()
 
 
@@ -144,11 +151,11 @@ async def international_journal_handler(message: types.Message, state:FSMContext
         'level': 'international_journal'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=write_article(language))
+        await message.answer("Quyidagilardan birini tanlang 👇", reply_markup=write_article(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=write_article(language))
+        await message.answer("Choose one of the following 👇", reply_markup=write_article(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=write_article(language))
+        await message.answer("Выберите один из следующих 👇", reply_markup=write_article(language))
     await state.finish()
 
 
@@ -161,9 +168,9 @@ async def writing_handler(message: types.Message, state:FSMContext):
         'level': 'writing'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=status(language))
+        await message.answer("Quyidagi sohalardan birini tanlang 👇", reply_markup=status(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=status(language))
+        await message.answer("Choose one of the fields below 👇", reply_markup=status(language))
     else:
         await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=status(language))
     await state.finish()
@@ -178,11 +185,11 @@ async def writing_and_publishing_handler(message: types.Message, state:FSMContex
         'level': 'writing_and_publishing'
     })
     if language == 'uz':
-        await message.answer("Rahmat! Sizning fikringiz biz uchun muhim!", reply_markup=status(language))
+        await message.answer("Quyidagi sohalardan birini tanlang 👇", reply_markup=status(language))
     elif language == 'en':
-        await message.answer("Thank you! Your opinion is important to us!", reply_markup=status(language))
+        await message.answer("Choose one of the fields below 👇", reply_markup=status(language))
     else:
-        await message.answer("Спасибо! Ваше мнение важно для нас!", reply_markup=status(language))
+        await message.answer("Choose one of the fields below 👇", reply_markup=status(language))
     await state.finish()
 
 
@@ -203,21 +210,23 @@ async def document_handler(message: types.Message, state:FSMContext):
 
     await Level.document.set()
 
+
+
 def confirm(language):
     if language == 'uz':
         return types.InlineKeyboardMarkup(row_width=2).add(
             types.InlineKeyboardButton(text="✅ Tasdiqlash", callback_data="confirm"),
-            types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
+            types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="bekor_qilish")
         )
     elif language == 'en':
         return types.InlineKeyboardMarkup(row_width=2).add(
             types.InlineKeyboardButton(text="✅ Confirm", callback_data="confirm"),
-            types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+            types.InlineKeyboardButton(text="❌ Cancel", callback_data="bekor_qilish")
         )
     else:
         return types.InlineKeyboardMarkup(row_width=2).add(
             types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
-            types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+            types.InlineKeyboardButton(text="❌ Отменить", callback_data="bekor_qilish")
         )
     
 
@@ -268,9 +277,146 @@ async def document_cancel(call:types.CallbackQuery, state:FSMContext):
 
 ##################### Texnika uchun shartnoma #####################
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
 @dp.message_handler(Text(equals=["Texnika", "Техника", "Technique"]))
-async def technique_handler(message: types.Message, state:FSMContext):
-    agreement_path = "Share Data.pdf"  # Shartnoma faylini joylash manzili
+async def technique_handler(message: types.Message, state: FSMContext):
+    agreement_path = "Share Data.pdf"
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=Tasdiqlash(language))
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=Tasdiqlash(language))
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=Tasdiqlash(language))
+
+    
+def Tasdiqlash(language):
+    if language == 'uz':
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Roziman", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="bekor_qilish")
+        )
+    elif language == 'en':
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ I agree", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Cancel", callback_data="bekor_qilish")
+        )
+    else:
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Отменить", callback_data="bekor_qilish")
+        )
+
+
+@dp.callback_query_handler(text="tasdiqlash")
+async def agreement_accepted(call: types.CallbackQuery, state: FSMContext):
+    language = language_info(call.from_user.id)
+    # delete last message 
+    await call.message.delete()
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
+
+
+@dp.callback_query_handler(text="bekor_qilish")
+async def agreement_cancelled(call: types.CallbackQuery, state: FSMContext):
+    language = language_info(call.from_user.id)
+    await call.message.delete()
+    if language == 'uz':
+        await call.message.answer("❌ Shartnoma bekor qilindi!")
+    elif language == 'en':
+        await call.message.answer("❌ Agreement cancelled!")
+    else:
+        await call.message.answer("❌ Соглашение отменено!")
+    await state.finish()
+
+
+
+
+
+##################### Pedagogika uchun shartnoma #####################
+
+@dp.message_handler(Text(equals=["Pedagogika", "Педагогика", "Pedagogy"]))
+async def pedagogy_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"
+    with open(agreement_path, 'rb') as agreement_file:
+        await bot.send_document(message.chat.id, agreement_file)
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+
+    if language == 'uz':
+        await message.answer("Shartnomani o'qib chiqib, rozilik bildiring:", reply_markup=Tasdiqlash(language))
+    elif language == 'en':
+        await message.answer("Read the agreement and give your consent:", reply_markup=Tasdiqlash(language))
+    else:
+        await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=Tasdiqlash(language))
+
+
+# "Tushundim" degan buttonni yaratish
+def Tasdiqlash(language):
+    if language == 'uz':
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Roziman", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="bekor_qilish")
+        )
+    elif language == 'en':
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ I agree", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Cancel", callback_data="bekor_qilish")
+        )
+    else:
+        return types.InlineKeyboardMarkup(row_width=2).add(
+            types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="tasdiqlash"),
+            types.InlineKeyboardButton(text="❌ Отменить", callback_data="bekor_qilish")
+        )
+        
+
+
+@dp.callback_query_handler(text="tasdiqlash", state=Level.pedagogy)
+async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
+    language = language_info(call.from_user.id)
+    if language == 'uz':
+        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+    elif language == 'en':
+        await call.message.answer("✅ Agreement confirmed!")
+    else:
+        await call.message.answer("✅ Соглашение подтверждено!")
+    await state.finish()
+
+
+@dp.callback_query_handler(text="bekor_qilish", state=Level.pedagogy)
+async def agreement_cancelled(call: types.CallbackQuery, state=FSMContext):
+    language = language_info(call.from_user.id)
+    if language == 'uz':
+        await call.message.answer("❌ Shartnoma bekor qilindi!")
+    elif language == 'en':
+        await call.message.answer("❌ Agreement cancelled!")
+    else:
+        await call.message.answer("❌ Соглашение отменено!")
+    await state.finish()
+
+
+
+
+######################## Iqtisodiyot uchun shartnoma #####################
+
+@dp.message_handler(Text(equals=["Iqtisodiyot", "Экономика", "Economy"]))
+async def economy_handler(message: types.Message, state:FSMContext):
+    agreement_path = "Share Data.pdf"
     with open(agreement_path, 'rb') as agreement_file:
         await bot.send_document(message.chat.id, agreement_file)
     language = language_info(message.from_user.id)
@@ -281,6 +427,7 @@ async def technique_handler(message: types.Message, state:FSMContext):
     def Tasdiqlash(language):
         if language == 'uz':
             return types.InlineKeyboardMarkup(row_width=2).add(
+<<<<<<< HEAD
                 types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
             )
@@ -288,11 +435,20 @@ async def technique_handler(message: types.Message, state:FSMContext):
             return types.InlineKeyboardMarkup(row_width=2).add(
                 types.InlineKeyboardButton(text="✅ I agree", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Cancel", callback_data="cancel")
+=======
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="bekor_qilish")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="bekor_qilish")
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
             )
         else:
             return types.InlineKeyboardMarkup(row_width=2).add(
-                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
-                types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="bekor_qilish")
             )
     shart = Tasdiqlash(language)
 
@@ -304,7 +460,11 @@ async def technique_handler(message: types.Message, state:FSMContext):
         await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
 
 
+<<<<<<< HEAD
 @dp.callback_query_handler(text="agreement_accepted", state=Level.technique)
+=======
+@dp.callback_query_handler(text="tasdiqlash", state=Level.economy)
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
 async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
     language = language_info(call.from_user.id)
     data = await state.get_data()
@@ -318,6 +478,7 @@ async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
 
 
 
+<<<<<<< HEAD
 ##################### Pedagogika uchun shartnoma #####################
 
 @dp.message_handler(Text(equals=["Pedaqogika", "Педагогика", "Pedagogy"]))
@@ -422,6 +583,8 @@ async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
 
 
 
+=======
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
 ############################# Tibbiyot uchun shartnoma #############################
 
 @dp.message_handler(Text(equals=["Tibbiyot", "Медицина", "Medicine"]))
@@ -437,6 +600,7 @@ async def medicine_handler(message: types.Message, state:FSMContext):
     def Tasdiqlash(language):
         if language == 'uz':
             return types.InlineKeyboardMarkup(row_width=2).add(
+<<<<<<< HEAD
                 types.InlineKeyboardButton(text="✅ Roziman", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="cancel")
             )
@@ -449,6 +613,20 @@ async def medicine_handler(message: types.Message, state:FSMContext):
             return types.InlineKeyboardMarkup(row_width=2).add(
                 types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="confirm"),
                 types.InlineKeyboardButton(text="❌ Отменить", callback_data="cancel")
+=======
+                types.InlineKeyboardButton(text="✅ Roziman", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Bekor qilish", callback_data="bekor_qilish")
+            )
+        elif language == 'en':
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ I agree", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Cancel", callback_data="bekor_qilish")
+            )
+        else:
+            return types.InlineKeyboardMarkup(row_width=2).add(
+                types.InlineKeyboardButton(text="✅ Подтвердить", callback_data="tasdiqlash"),
+                types.InlineKeyboardButton(text="❌ Отменить", callback_data="bekor_qilish")
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
             )
     shart = Tasdiqlash(language)
 
@@ -459,8 +637,15 @@ async def medicine_handler(message: types.Message, state:FSMContext):
     else:
         await message.answer("Прочитайте соглашение и дайте свое согласие:", reply_markup=shart)
 
+<<<<<<< HEAD
 
 @dp.callback_query_handler(text="agreement_accepted", state=Level.medicine)
+=======
+    await Level.medicine.set()
+
+
+@dp.callback_query_handler(text="tasdiqlash", state=Level.medicine)
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
 async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
     language = language_info(call.from_user.id)
     data = await state.get_data()
@@ -470,4 +655,10 @@ async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
         await call.message.answer("✅ Agreement confirmed!")
     else:
         await call.message.answer("✅ Соглашение подтверждено!")
+<<<<<<< HEAD
     await state.finish()
+=======
+    await state.finish()
+
+
+>>>>>>> e4ec047b446a1186899335c3091b138d2284b347
