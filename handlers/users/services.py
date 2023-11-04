@@ -481,15 +481,55 @@ async def medicine_handler(message: types.Message, state:FSMContext):
 
 
 @dp.callback_query_handler(text="tasdiqlash", state=Level.medicine)
-async def agreement_accepted(call: types.CallbackQuery, state=FSMContext):
+async def agreement_accepted(call: types.CallbackQuery, state:FSMContext):
     language = language_info(call.from_user.id)
-    data = await state.get_data()
     if language == 'uz':
-        await call.message.answer("✅ Shartnoma tasdiqlandi!")
+        await call.message.answer("✅ Shartnoma tasdiqlandi!\n\nEndi quyidagi formalarni to'ldiring iltimos!" )
     elif language == 'en':
-        await call.message.answer("✅ Agreement confirmed!")
+        await call.message.answer("✅ Agreement confirmed!\n\nNow fill out the following forms please!")
     else:
-        await call.message.answer("✅ Соглашение подтверждено!")
+        await call.message.answer("✅ Соглашение подтверждено!\n\nТеперь заполните следующие формы пожалуйста!")
+
+    await Level.authors.set()
+
+
+
+############################# Maqola mualliflari #############################
+
+@dp.message_handler(state=Level.authors)
+async def authors_handler(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'language': language
+    })
+    if language == 'uz':
+        await message.answer("Maqola mualliflarini kiriting:")
+    elif language == 'en':
+        await message.answer("Enter the authors of the article:")
+    else:
+        await message.answer("Введите авторов статьи:")
+
+    await Level.article_name.set()
+
+
+@dp.message_handler(state=Level.article_name)
+async def authors_get(message: types.Message, state:FSMContext):
+    language = language_info(message.from_user.id)
+    await state.update_data({
+        'authors': message.text
+    })
+    if language == 'uz':
+        await message.answer("Maqola nomini kiriting:")
+    elif language == 'en':
+        await message.answer("Enter the name of the article:")
+    else:
+        await message.answer("Введите название статьи:")
+
     await state.finish()
+
+
+
+
+
 
 

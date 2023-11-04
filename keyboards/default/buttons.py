@@ -205,12 +205,9 @@ def status(language):
             InlineKeyboardButton('⬅️ Назад')
         )
     return button
+    
 
 
-def patent(language):
-    button = ReplyKeyboardMarkup(resize_keyboard=True)
-    if language == 'uz':
-        button.add
 
 
 def share_contact(language):
