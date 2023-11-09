@@ -21,3 +21,6 @@ class Level(StatesGroup):
     order_cancel = State()
     file_confirm = State()
     file_cancel = State()
+    authors = State()
+    article_name = State()
+
